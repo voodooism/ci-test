@@ -1,0 +1,35 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - deploy/dev
+  workflow_dispatch:
+
+jobs:
+  first_job:
+    name: First job
+    runs-on: ubuntu-latest
+    steps:
+      -   name: Checkout Branch
+          uses: actions/checkout@v4
+  second_job:
+    name: Second job
+    runs-on: ubuntu-latest
+    steps:
+      -   name: Checkout Branch
+          uses: actions/checkout@v4
+  third_job:
+    name: Third job
+    runs-on: ubuntu-latest
+    steps:
+      -   name: Checkout Branch
+          uses: actions/checkout@v4
+  fourth_job:
+    name: Fourth job
+    runs-on: ubuntu-latest
+    steps:
+      -   name: Checkout Branch
+          uses: actions/checkout@v4
+
+
