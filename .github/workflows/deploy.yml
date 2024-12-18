@@ -22,6 +22,8 @@ jobs:
       name: test
     runs-on: ubuntu-latest
     steps:
+      -   name: Automatic approval
+          run: gh workflow approve --job second_job --environment test
       -   name: Checkout Branch
           uses: actions/checkout@v4
   third_job:
@@ -31,6 +33,8 @@ jobs:
       name: test
     runs-on: ubuntu-latest
     steps:
+      -   name: Automatic approval
+          run: gh workflow approve --job third_job --environment test
       -   name: Checkout Branch
           uses: actions/checkout@v4
   fourth_job:
@@ -40,6 +44,8 @@ jobs:
       name: test
     runs-on: ubuntu-latest
     steps:
+      -   name: Automatic approval
+          run: gh workflow approve --job third_job --environment test
       -   name: Checkout Branch
           uses: actions/checkout@v4
 
