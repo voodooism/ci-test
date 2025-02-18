@@ -40,4 +40,7 @@ jobs:
         run: |
           echo "extension=openswoole.so" | sudo tee $(php --ini | grep "Scan for additional .ini files" | sed -E 's/.*: //')/99-openswoole.ini
 
+      - name: php m
+        run: php -m
+
         
