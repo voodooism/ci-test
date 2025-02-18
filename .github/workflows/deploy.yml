@@ -1,52 +1,35 @@
-name: Deployment
+name: PHP-CI
 
-on:
-  push:
-    branches:
-      - deploy/dev
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
-  first_job:
-    name: First job
-    environment:
-      name: test
+  coding_standards:
     runs-on: ubuntu-latest
+    env:
+      PHP_EXTENSIONS: pdo_sqlite, pkcs11, openswoole
+      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-pdo_sqlite-openswoole-pkcs11
+
     steps:
-      -   name: Checkout Branch
-          uses: actions/checkout@v4
-  second_job:
-    needs: [first_job]
-    name: Second job
-    environment:
-      name: test
-    runs-on: ubuntu-latest
-    steps:
-      -   name: Automatic approval
-          run: gh workflow approve --job second_job --environment test
-      -   name: Checkout Branch
-          uses: actions/checkout@v4
-  third_job:
-    needs: [second_job]
-    name: Third job
-    environment:
-      name: test
-    runs-on: ubuntu-latest
-    steps:
-      -   name: Automatic approval
-          run: gh workflow approve --job third_job --environment test
-      -   name: Checkout Branch
-          uses: actions/checkout@v4
-  fourth_job:
-    needs: [third_job]
-    name: Fourth job
-    environment:
-      name: test
-    runs-on: ubuntu-latest
-    steps:
-      -   name: Automatic approval
-          run: gh workflow approve --job third_job --environment test
-      -   name: Checkout Branch
+      -   name: Checkout
           uses: actions/checkout@v4
 
+      -   name: Setup cache environment
+          id: cache-extensions
+          uses: shivammathur/cache-extensions@v1
+          with:
+            php-version: '8.2'
+            extensions: ${{ env.PHP_EXTENSIONS }}
+            key: ${{ env.PHP_EXTENSIONS_CACHE_KEY }}
 
+      -   name: Cache extensions
+          uses: actions/cache@v4
+          with:
+            path: ${{ steps.cache-extensions.outputs.dir }}
+            key: ${{ steps.cache-extensions.outputs.key }}
+
+      -   name: Setup PHP ${{ matrix.php }}
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: '8.2'
+            coverage: 'none'
+            extensions: ${{ env.PHP_EXTENSIONS }}
