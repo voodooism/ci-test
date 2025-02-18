@@ -6,7 +6,7 @@ jobs:
   coding_standards:
     runs-on: ubuntu-22.04
     env:
-      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-openswoole
+      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-openswoole-v1
 
     steps:
       -   name: Checkout
@@ -27,22 +27,11 @@ jobs:
             key: ${{ steps.cache-extensions.outputs.key }}
 
       -   name: Setup PHP
-          uses: shivammathur/setup-php@verbose
+          uses: voodooism/setup-php@4eb1919d226aeb231ea69834616a33342a87882d
           with:
             php-version: '8.2'
             coverage: 'none'
-            extensions: :openswoole
-
-      - name: Check PHP extension directory
-        run: php -i
-
-      - name: Force OpenSwoole ini load
-        run: |
-          echo "extension=openswoole.so" | sudo tee $(php --ini | grep "Scan for additional .ini files" | sed -E 's/.*: //')/25-openswoole.ini
+            extensions: openswoole
 
       - name: php m
         run: php -m
-
-      - name: Show files in the directory
-        run: ls -la /etc/php/8.2/cli/conf.d
-        
