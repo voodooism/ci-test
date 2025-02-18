@@ -6,8 +6,8 @@ jobs:
   coding_standards:
     runs-on: ubuntu-22.04
     env:
-      PHP_EXTENSIONS: sockets, openswoole
-      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-openswoole
+      PHP_EXTENSIONS: swoole
+      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-swoole
 
     steps:
       -   name: Checkout
