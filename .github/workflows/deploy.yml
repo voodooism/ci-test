@@ -34,7 +34,7 @@ jobs:
             extensions: :openswoole
 
       -   name: Manually enable OpenSwoole
-          run: echo "extension=openswoole.so" >> "$(php -i | grep 'Scan this dir for additional .ini files' | awk '{print $NF}')/30-openswoole.ini"
+          run: sudo echo "extension=openswoole.so" >> "$(php -i | grep 'Scan this dir for additional .ini files' | awk '{print $NF}')/30-openswoole.ini"
 
       - name: Verify OpenSwoole is enabled
         run: php -m
