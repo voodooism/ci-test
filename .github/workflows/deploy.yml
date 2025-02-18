@@ -33,8 +33,5 @@ jobs:
             coverage: 'none'
             extensions: :openswoole
 
-      - name: Enable redis extension
-        run: echo "extension=openswoole.so" >> $GITHUB_WORKSPACE/.ini
-
-      - name: Verify OpenSwoole is enabled
-        run: php -m
+      - name: Check if OpenSwoole is installed
+        run: php -i | grep -i swoole || echo "OpenSwoole is not installed"
