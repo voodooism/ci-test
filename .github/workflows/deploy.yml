@@ -43,4 +43,6 @@ jobs:
       - name: php m
         run: php -m
 
+      - name: Show files in the directory
+        run: ls -la /etc/php/8.2/cli/conf.d
         
