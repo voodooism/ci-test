@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PHP_EXTENSIONS: openswoole
-      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-openswoole
+      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-openswoole-v1
 
     steps:
       -   name: Checkout.
