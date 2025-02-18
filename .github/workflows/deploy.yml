@@ -6,8 +6,8 @@ jobs:
   coding_standards:
     runs-on: ubuntu-latest
     env:
-      PHP_EXTENSIONS: pdo_sqlite, pkcs11, openswoole
-      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-pdo_sqlite-openswoole-pkcs11
+      PHP_EXTENSIONS: openswoole
+      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-openswoole
 
     steps:
       -   name: Checkout
@@ -15,10 +15,10 @@ jobs:
 
       -   name: Setup cache environment
           id: cache-extensions
-          uses: shivammathur/cache-extensions@61a445950f67069fbe66bacb1235dc552b27ca8a
+          uses: shivammathur/cache-extensions@v1
           with:
             php-version: '8.2'
-            extensions: pdo_sqlite, pkcs11
+            extensions: ${{ env.PHP_EXTENSIONS }}
             key: ${{ env.PHP_EXTENSIONS_CACHE_KEY }}
 
       -   name: Cache extensions
