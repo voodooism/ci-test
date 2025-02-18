@@ -27,7 +27,7 @@ jobs:
             path: ${{ steps.cache-extensions.outputs.dir }}
             key: ${{ steps.cache-extensions.outputs.key }}
 
-      -   name: Setup PHP ${{ matrix.php }}
+      -   name: Setup PHP
           uses: shivammathur/setup-php@verbose
           with:
             php-version: '8.2'
