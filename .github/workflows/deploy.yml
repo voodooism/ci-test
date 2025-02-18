@@ -18,7 +18,7 @@ jobs:
           uses: shivammathur/cache-extensions@61a445950f67069fbe66bacb1235dc552b27ca8a
           with:
             php-version: '8.2'
-            extensions: ${{ env.PHP_EXTENSIONS }}
+            extensions: pdo_sqlite, pkcs11
             key: ${{ env.PHP_EXTENSIONS_CACHE_KEY }}
 
       -   name: Cache extensions
