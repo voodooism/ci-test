@@ -6,8 +6,8 @@ jobs:
   coding_standards:
     runs-on: ubuntu-latest
     env:
-      PHP_EXTENSIONS: curl, mysqlnd, openswoole
-      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-openswoole-v2
+      PHP_EXTENSIONS: openswoole
+      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-openswoole
 
     steps:
       -   name: Checkout
