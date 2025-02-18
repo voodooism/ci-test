@@ -10,7 +10,7 @@ jobs:
       PHP_EXTENSIONS_CACHE_KEY: cache-extensions-pdo_sqlite-openswoole-pkcs11
 
     steps:
-      -   name: Checkout.
+      -   name: Checkout
           uses: actions/checkout@v4
 
       -   name: Setup cache environment
