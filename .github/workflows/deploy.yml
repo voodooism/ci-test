@@ -3,35 +3,23 @@ name: PHP-CI
 on: [push, pull_request]
 
 jobs:
-  coding_standards:
-    runs-on: ubuntu-22.04
-    env:
-      PHP_EXTENSIONS_CACHE_KEY: cache-extensions-openswoole-v1
+  deploy_dev:
+    strategy:
+      fail-fast: false
+      matrix:
+        regions:
+          - name: 'us-west-1'
+            bucket: 'bucket-one'
+            url: 'https://example-one.com'
+          - name: 'eu-central-1'
+            bucket: 'bucket-two'
+            url: 'https://example-two.com'
 
-    steps:
-      -   name: Checkout.
-          uses: actions/checkout@v4
-
-      -   name: Setup cache environment
-          id: cache-extensions
-          uses: shivammathur/cache-extensions@v1
-          with:
-            php-version: '8.2'
-            extensions: openswoole
-            key: ${{ env.PHP_EXTENSIONS_CACHE_KEY }}
-
-      -   name: Cache extensions
-          uses: actions/cache@v4
-          with:
-            path: ${{ steps.cache-extensions.outputs.dir }}
-            key: ${{ steps.cache-extensions.outputs.key }}
-
-      -   name: Setup PHP
-          uses: voodooism/setup-php@4eb1919d226aeb231ea69834616a33342a87882d
-          with:
-            php-version: '8.2'
-            coverage: 'none'
-            extensions: openswoole
-
-      - name: php m
-        run: php -m
+    name: Deployment (DEV)
+    uses: ./.github/workflows/base-serverless-deploy.yml
+    with:
+      environment-name: 'dev'
+      environment-region: ${{ matrix.regions.name }}
+      environment-assets-bucket: ${{ matrix.regions.bucket }}
+      environment-url: ${{ matrix.regions.url }}
+    secrets: inherit

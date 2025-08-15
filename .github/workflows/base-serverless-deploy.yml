@@ -1,0 +1,28 @@
+name: Base Serverless Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment-name:
+        required: true
+        type: string
+      environment-region:
+        required: true
+        type: string
+      environment-assets-bucket:
+        required: true
+        type: string
+      environment-url:
+        required: true
+        type: string
+
+jobs:
+  echo-params:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show inputs
+        run: |
+          echo "Environment Name:     ${{ inputs.environment-name }}"
+          echo "Environment Region:   ${{ inputs.environment-region }}"
+          echo "Assets Bucket:        ${{ inputs.environment-assets-bucket }}"
+          echo "Environment URL:      ${{ inputs.environment-url }}"
