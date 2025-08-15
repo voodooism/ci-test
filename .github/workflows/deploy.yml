@@ -15,7 +15,7 @@ jobs:
             bucket: 'bucket-two'
             url: 'https://example-two.com'
 
-    name: Deployment (DEV)
+    name: Deployment (DEV)${{ matrix.regions.placeholder }}
     uses: ./.github/workflows/base-serverless-deploy.yml
     with:
       environment-name: 'dev'
